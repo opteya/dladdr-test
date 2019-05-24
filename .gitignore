@@ -1,0 +1,7 @@
+*~
+*.o
+*.s
+*.so
+generator
+dladdr-test-multiple
+dladdr-test-single
