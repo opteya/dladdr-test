@@ -94,12 +94,12 @@ static char *gen_random_name(const char *prefix)
 
 static void emit_random_symbol(const char *prefix)
 {
-	const uint32_t align = 1u << rand32_max(16);
+	const uint32_t align = rand32_max(16);
 	const uint32_t size = 1 + rand32_max(12345);
 	const char *name = gen_random_name(prefix);
 
 	printf("\t.globl %s\n"
-	       "\t.align %" PRIu32 "\n"
+	       "\t.p2align %" PRIu32 "\n"
 	       "\t.type  %s, @object\n"
 	       "\t.size  %s, %" PRIu32 "\n"
 	       "%s:\n"
@@ -115,10 +115,10 @@ static void emit_random_symbol(const char *prefix)
 
 static void emit_known_symbol(const char *name, unsigned long size)
 {
-	const uint32_t align = 1u << rand32_max(16);
+	const uint32_t align = rand32_max(16);
 
 	printf("\t.globl %s\n"
-	       "\t.align %" PRIu32 "\n"
+	       "\t.p2align %" PRIu32 "\n"
 	       "\t.type  %s, @object\n"
 	       "\t.size  %s, %lu\n"
 	       "%s:\n"
