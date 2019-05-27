@@ -13,6 +13,7 @@ make_LDFLAGS += -Wl,-z,defs
 make_LDFLAGS += -Wl,-z,now
 make_LDFLAGS += -Wl,-z,relro
 make_LDFLAGS += -Wl,-z,noexecstack
+make_LDFLAGS += -Wl,-z,separate-code
 
 program_CFLAGS += -fPIE
 program_CPPFLAGS += -DPIE
