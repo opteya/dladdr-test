@@ -5,6 +5,7 @@ make_CFLAGS += -Og
 make_CFLAGS += -g
 make_CFLAGS += -fstack-protector-strong
 make_CFLAGS += -fstack-clash-protection
+make_CFLAGS += -fasynchronous-unwind-tables
 
 make_CPPFLAGS += -D_FORTIFY_SOURCE=2
 
@@ -15,6 +16,7 @@ make_LDFLAGS += -Wl,-z,noexecstack
 program_CFLAGS += -fPIE
 program_CPPFLAGS += -DPIE
 program_LDFLAGS += -pie
+program_LDFLAGS += -rdynamic
 
 shlib_CFLAGS += -fPIC
 shlib_CPPFLAGS += -DPIC
