@@ -109,17 +109,14 @@ libsymbols.so: $(libsymbol_OBJS)
 dladdr-test_LDFLAGS += -Wl,-rpath,\$$ORIGIN
 
 dladdr-test-multiple: $(libsymbol_LIBS)
-dladdr-test-multiple: dladdr-test-multiple.o
+dladdr-test-multiple: dladdr-test.o
 	$(call make_program,,,$(dladdr-test_LDFLAGS),-ldl)
-
-dladdr-test-multiple.o: dladdr-test.c
-	$(call make_program_object,-DSIZEMAX=$(SIZEMAX))
 
 dladdr-test-single: libsymbols.so
-dladdr-test-single: dladdr-test-single.o
+dladdr-test-single: dladdr-test.o
 	$(call make_program,,,$(dladdr-test_LDFLAGS),-ldl)
 
-dladdr-test-single.o: dladdr-test.c
+dladdr-test.o: dladdr-test.c
 	$(call make_program_object,-DSIZEMAX=$(SIZEMAX))
 
 generator: generator.o
