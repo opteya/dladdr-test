@@ -9,6 +9,7 @@ make_CFLAGS += -fasynchronous-unwind-tables
 
 make_CPPFLAGS += -D_FORTIFY_SOURCE=2
 
+make_LDFLAGS += -Wl,--hash-style,both
 make_LDFLAGS += -Wl,-O1
 make_LDFLAGS += -Wl,-z,defs
 make_LDFLAGS += -Wl,-z,now
