@@ -72,6 +72,15 @@ endef
 
 all: $(PROGRAMS)
 
+## disable most automatic / implicit rules
+.SUFFIXES: ;
+
+## disable all automatic, implicit rules
+MAKEFLAGS+=-r
+
+## disable makefile rebuilding
+$(MAKEFILE_LIST): ;
+
 clean:
 	$(RM) $(PROGRAMS) $(libsymbol_LIBS) $(libsymbol_SOURCES) libsymbols.so generator *.o
 
