@@ -66,15 +66,21 @@ static void test(void)
 			abort();
 		}
 
+		if (info.dli_sname == NULL)
+		{
+			fprintf(stderr, "%s!%p: name is NULL\n", name, addr);
+			abort();
+		}
+
 		if (strcmp(info.dli_sname, name) != 0)
 		{
-			fprintf(stderr, "name mismatch\n");
+			fprintf(stderr, "%s!%p: name mismatch: %s\n", name, addr, info.dli_sname);
 			abort();
 		}
 
 		if (info.dli_saddr != addr)
 		{
-			fprintf(stderr, "addr mismatch\n");
+			fprintf(stderr, "%s!%p: addr mismatch: %p\n", name, addr, info.dli_saddr);
 			abort();
 		}
 	}
