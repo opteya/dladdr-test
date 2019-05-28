@@ -59,7 +59,7 @@ static void test(void)
 			break;
 		}
 
-		uintptr_t offset = i / 2;
+		uintptr_t offset = ((i + 1) / 2) - 1;
 
 		if (offset > UINTPTR_MAX - (uintptr_t)addr)
 		{
