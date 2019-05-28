@@ -59,28 +59,29 @@ static void test(void)
 			break;
 		}
 
+		uintptr_t offset = i / 2;
 		Dl_info info;
-		if (dladdr(addr + (i / 2), &info) == 0)
+		if (dladdr(addr + offset, &info) == 0)
 		{
-			fprintf(stderr, "%s!%p: %s\n", name, addr, dlerror());
+			fprintf(stderr, "%s!%p+%#" PRIxPTR ": %s\n", name, addr, offset, dlerror());
 			abort();
 		}
 
 		if (info.dli_sname == NULL)
 		{
-			fprintf(stderr, "%s!%p: name is NULL\n", name, addr);
+			fprintf(stderr, "%s!%p+%#" PRIxPTR ": name is NULL\n", name, addr, offset);
 			abort();
 		}
 
 		if (strcmp(info.dli_sname, name) != 0)
 		{
-			fprintf(stderr, "%s!%p: name mismatch: %s\n", name, addr, info.dli_sname);
+			fprintf(stderr, "%s!%p+%#" PRIxPTR ": name mismatch: %s\n", name, addr, offset, info.dli_sname);
 			abort();
 		}
 
 		if (info.dli_saddr != addr)
 		{
-			fprintf(stderr, "%s!%p: addr mismatch: %p\n", name, addr, info.dli_saddr);
+			fprintf(stderr, "%s!%p+%#" PRIxPTR ": addr mismatch: %p\n", name, addr, offset, info.dli_saddr);
 			abort();
 		}
 	}
