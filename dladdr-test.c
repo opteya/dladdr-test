@@ -41,11 +41,13 @@
 # error UINTPTR_WIDTH not defined
 #endif
 
+static const uintptr_t test_sizemax = test_UINTPTR_C(SIZEMAX);
+
 static void test(void)
 {
 	uintptr_t i;
 
-	for (i = 1; i <= test_UINTPTR_C(SIZEMAX); i *= 2)
+	for (i = 1; i <= test_sizemax; i *= 2)
 	{
 		char name[strlen("symbol") + 10 + 1];
 		snprintf(name, sizeof(name), "symbol%" PRIuPTR, i);
