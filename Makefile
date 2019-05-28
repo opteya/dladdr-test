@@ -26,6 +26,7 @@ program_LDFLAGS += -rdynamic
 shlib_CFLAGS += -fPIC
 shlib_CPPFLAGS += -DPIC
 shlib_LDFLAGS += -shared
+shlib_LDFLAGS += -Wl,--no-allow-shlib-undefined
 
 PROGRAMS := dladdr-test-multiple
 PROGRAMS += dladdr-test-single
