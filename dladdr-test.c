@@ -22,20 +22,33 @@
 #define _GNU_SOURCE // RTLD_DEFAULT
 #include <dlfcn.h>
 #include <errno.h>
+#include <inttypes.h>
 #include <limits.h>
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 
+#ifdef UINTPTR_WIDTH
+# if UINTPTR_WIDTH == 32
+#  define test_UINTPTR_C(v) UINT32_C(v)
+# elif UINTPTR_WIDTH == 64
+#  define test_UINTPTR_C(v) UINT64_C(v)
+# else
+#  error UINTPTR_WIDTH not supported
+# endif
+#else
+# error UINTPTR_WIDTH not defined
+#endif
+
 static void test(void)
 {
-	unsigned int i;
+	uintptr_t i;
 
-	for (i = 1; i <= SIZEMAX; i *= 2)
+	for (i = 1; i <= test_UINTPTR_C(SIZEMAX); i *= 2)
 	{
 		char name[strlen("symbol") + 10 + 1];
-		snprintf(name, sizeof(name), "symbol%u", i);
+		snprintf(name, sizeof(name), "symbol%" PRIuPTR, i);
 
 		uint8_t *addr = dlsym(RTLD_DEFAULT, name);
 		if (addr == NULL)
