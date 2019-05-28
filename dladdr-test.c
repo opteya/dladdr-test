@@ -60,6 +60,13 @@ static void test(void)
 		}
 
 		uintptr_t offset = i / 2;
+
+		if (offset > UINTPTR_MAX - (uintptr_t)addr)
+		{
+			fprintf(stderr, "%s!%p+%#" PRIxPTR ": overflow\n", name, addr, offset);
+			abort();
+		}
+
 		Dl_info info;
 		if (dladdr(addr + offset, &info) == 0)
 		{
