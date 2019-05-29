@@ -31,7 +31,7 @@ shlib_LDFLAGS += -Wl,--no-allow-shlib-undefined
 PROGRAMS := dladdr-test-multiple
 PROGRAMS += dladdr-test-single
 
-SIZEMAX  := $(guile (expt 2 29))
+SIZEMAX  := $(guile (expt 2 28))
 
 define gensize
 (define (power2 v m)

@@ -118,13 +118,75 @@ static void emit_known_symbol(const char *name, unsigned long size)
 	const uint32_t align = rand32_max(16);
 
 	printf("\t.p2align %" PRIu32 "\n"
-	       "\t.globl %s\n"
+	       "\n",
+	       align);
+
+	// 0b111
+	printf("\t.globl %s.7\n"
+	       "\t.type  %s.7, @object\n"
+	       "\t.size  %s.7, %lu\n"
+	       "%s.7:\n"
+	       "\n",
+	       name,
+	       name,
+	       name, size * 3,
+	       name);
+
+	// 0b110
+	printf("\t.globl %s.6\n"
+	       "\t.type  %s.6, @object\n"
+	       "\t.size  %s.6, %lu\n"
+	       "%s.6:\n"
+	       "\n",
+	       name,
+	       name,
+	       name, size * 2,
+	       name);
+
+	// 0b100
+	printf("\t.globl %s.4\n"
+	       "\t.type  %s.4, @object\n"
+	       "\t.size  %s.4, %lu\n"
+	       "%s.4:\n"
+	       "\t.zero  %lu\n"
+	       "\n",
+	       name,
+	       name,
+	       name, size,
+	       name,
+	       size);
+
+	// 0b011
+	printf("\t.globl %s.3\n"
+	       "\t.type  %s.3, @object\n"
+	       "\t.size  %s.3, %lu\n"
+	       "%s.3:\n"
+	       "\n",
+	       name,
+	       name,
+	       name, size * 2,
+	       name);
+
+	// 0b010 (aka. the symbol known by dladdr-test)
+	printf("\t.globl %s\n"
 	       "\t.type  %s, @object\n"
 	       "\t.size  %s, %lu\n"
 	       "%s:\n"
 	       "\t.zero  %lu\n"
 	       "\n",
-	       align,
+	       name,
+	       name,
+	       name, size,
+	       name,
+	       size);
+
+	// 0b001
+	printf("\t.globl %s.1\n"
+	       "\t.type  %s.1, @object\n"
+	       "\t.size  %s.1, %lu\n"
+	       "%s.1:\n"
+	       "\t.zero  %lu\n"
+	       "\n",
 	       name,
 	       name,
 	       name, size,
